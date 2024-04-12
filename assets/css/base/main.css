@@ -148,6 +148,7 @@ body {
   font-family: Gordita, sans-serif;
   color: var(--text-color);
   background: var(--body-bg);
+  scroll-behavior: smooth;
 }
 
 a {
@@ -1303,6 +1304,9 @@ html {
     display: none;
   }
 }
+.top-bar .navbar__item:hover .dropdown {
+  display: block;
+}
 .top-bar .navbar__item:first-child a {
   padding-left: 0;
 }
@@ -1378,9 +1382,12 @@ html {
     gap: 10px;
   }
 }
+.logo-img {
+  width: 45px;
+}
 @media (max-width: 991.98px) {
   .logo-img {
-    width: 24px;
+    width: 50px;
   }
 }
 
@@ -1389,15 +1396,17 @@ html {
   left: 0;
   padding-top: 54px;
   width: min(1240px, 100%);
+  display: none;
 }
 .dropdown__inner {
+  --menu-padding: 30px;
   position: relative;
   border-radius: 20px;
-  padding: 30px;
+  padding: var(--menu-padding);
   background: var(--dropdown-bg-color);
   box-shadow: 0px 40px 90px 20px var(--dropdown-shadow-color);
   width: 100%;
-  max-height: min(582px, 100vh - 158px);
+  max-height: var(--menu-max-height);
 }
 .dropdown__inner::before {
   content: url(/assets/icons/dropdown-arrow.svg);
@@ -1408,16 +1417,26 @@ html {
   filter: var(--dropdown-arrow-color);
 }
 .dropdown .top-menu {
-  height: min(518px, 100vh - 100px);
+  --main-menu-width: 292px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow-y: auto;
+  height: calc(min(582px, 100vh - 158px) - var(--menu-padding) * 2);
 }
 .dropdown .top-menu__main {
-  width: min(292px, 100%);
+  max-height: calc(min(582px, 100vh - 158px) - var(--menu-padding) * 2);
+  width: var(--main-menu-width);
   border-right: 1px solid var(--menu-main-border-color);
+  overflow-y: auto;
 }
 
 .menu-column {
   display: flex;
   gap: 14px;
+}
+.menu-column + .menu-column {
+  margin-top: 21px;
 }
 .menu-column__icon {
   position: relative;
@@ -1441,6 +1460,13 @@ html {
   line-height: 1.5; /* 150% */
   margin-bottom: 19px;
 }
+.menu-column__item:hover > .menu-column__link {
+  color: var(--menu-item-hover-color);
+  font-weight: 500;
+}
+.menu-column .menu-column__item--active .sub-menu, .menu-column__item:hover .sub-menu {
+  display: grid;
+}
 .menu-column__link {
   display: block;
   padding: 7px 0;
@@ -1448,9 +1474,13 @@ html {
   font-size: 1.4rem;
   line-height: 1.42; /* 142.857% */
 }
-.menu-column__link:hover {
-  color: var(--menu-item-hover-color);
-  font-weight: 500;
+
+.sub-menu {
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--menu-padding);
+  position: absolute;
+  inset: 0 0 0 var(--main-menu-width);
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -12,8 +12,9 @@
   }
 
   &-img {
+    width: 45px;
     @include abstracts.breakpoint(lg) {
-      width: 24px;
+      width: 50px;
     }
   }
 }

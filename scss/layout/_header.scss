@@ -45,6 +45,9 @@
       @extend %flexItemsCenter;
     }
     &__item {
+      &:hover .dropdown {
+        display: block;
+      }
       &:first-child a {
         padding-left: 0;
       }
